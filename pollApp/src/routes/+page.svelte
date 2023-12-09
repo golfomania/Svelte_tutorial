@@ -13,25 +13,8 @@
 	};
 
 	//add new poll
-	let polls = [];
 	const handleAddPoll = (e) => {
-		polls = [...polls, e.detail];
-		console.log(polls);
 		activeItem = 'Current Polls';
-	};
-
-	//handle vote
-	const handleVote = (e) => {
-		const { answer, id } = e.detail;
-		let copyPolls = [...polls];
-		let upvotedPoll = copyPolls.find((poll) => poll.id === id);
-		if (answer === 'a') {
-			upvotedPoll.votesA++;
-		} else {
-			upvotedPoll.votesB++;
-		}
-		polls = copyPolls;
-		console.log(polls);
 	};
 </script>
 
@@ -39,7 +22,7 @@
 <main>
 	<Tabs {items} {activeItem} on:tabChange={tabChange} />
 	{#if activeItem === 'Current Polls'}
-		<PollList {polls} on:vote={handleVote} />
+		<PollList />
 	{:else if activeItem === 'Add new poll'}
 		<CreatPollForm on:addPoll={handleAddPoll} />
 	{/if}
